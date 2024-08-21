@@ -7,13 +7,11 @@ from base_caching import BaseCaching
 class BasicCache(BaseCaching):
     '''basic caching system'''
     def put(self, key, item):
-        self.cache_data[key] = item
         '''method that puts items in cache'''
-        if key and item is None:
-            return
+        if key is not None and item is not None:
+            self.cache_data[key] = item
 
     def get(self, key):
-        self.cache_data.get(key)
         '''method that gets items from cache'''
-        if key is None:
-            return None
+
+        return self.cache_data[key]
