@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 
-'''class FIFOCache that inherits from BaseCaching and is a caching system'''
+'''class LIFOCache that inherits from BaseCaching and is a caching system'''
 from collections import OrderedDict
 from base_caching import BaseCaching
 
 
-class FIFOCache(BaseCaching):
-    """ FIFO caching system """
+class LIFOCache(BaseCaching):
+    """ LIFO caching system """
 
     def __init__(self):
-        """ Initialize FIFO caching system """
+        """ Initialize LIFO caching system """
         super().__init__()
         self.cache_data = OrderedDict()
 
@@ -21,8 +21,9 @@ class FIFOCache(BaseCaching):
         self.cache_data[key] = item
 
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            first_key, _ = self.cache_data.popitem(last=False)
-            print(f"DISCARD: {first_key}")
+            last_key = list(self.cache_data.keys())[-2]
+            print(f"DISCARD: {last_key}")
+            self.cache_data.popitem(last=True)
 
     def get(self, key):
         """ Get an item by key """
